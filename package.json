@@ -1,0 +1,17 @@
+{
+  "name": "flow",
+  "version": "0.1.0",
+  "description": "An actionable traverser of directed graphs",
+  "main": "flow.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flow",
+    "graph",
+    "directed",
+    "traversal"
+  ],
+  "author": "Kevin Garsjo",
+  "license": "MIT"
+}
