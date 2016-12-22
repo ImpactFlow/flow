@@ -2,4 +2,10 @@
 
 > An action-driven traverser of directed graphs
 
-More details coming soon!
+## Installation
+
+If you haven't already, install [Yarn](https://yarnpkg.com/en/docs/install).
+
+To install, run `yarn`.
+To build, run `yarn build`.
+To test, run `yarn test`.
