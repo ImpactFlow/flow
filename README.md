@@ -1,5 +1,7 @@
 # Flow
 
+[![Build Status](https://travis-ci.org/kgarsjo/Flow.svg?branch=master)](https://travis-ci.org/kgarsjo/Flow)
+
 > An action-driven traverser of directed graphs
 
 ## Installation
