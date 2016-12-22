@@ -1,0 +1,8 @@
+.git/
+coverage/
+dist/.keep
+node_modules/
+tests/
+.eslintrc.json
+.gitignore
+webpack.config.js
