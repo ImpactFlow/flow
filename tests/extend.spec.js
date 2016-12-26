@@ -5,9 +5,13 @@ var extend = require('../lib/extend');
 describe('extend', function () {
     var Animal = function () {
         this.name = 'Animal';
+        this.type = 'Mammal';
     };
     Animal.prototype.isCalled = function () {
         return this.name;
+    };
+    Animal.prototype.isType = function () {
+        return this.type;
     };
     Animal.prototype.livesOn = function () {
         return 'Earth';
@@ -38,6 +42,10 @@ describe('extend', function () {
 
         it('should add new properties onto subclass', function () {
             expect(Cow.prototype.turnsInto).toBeDefined();
+        });
+
+        it('should call original constructor even if subclass initialize has been provided', function () {
+            expect(instance.isType()).toEqual('Mammal');
         });
 
         it('should use overriding functions on subclass instance', function () {
