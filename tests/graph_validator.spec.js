@@ -2,10 +2,10 @@
 
 var Graph = require('../lib/graph');
 var GraphValidator = require('../lib/graph_validator');
+var helpers = require('./helpers');
 
-function vertexData() {
-    return {};
-}
+var edgeData = helpers.edgeData;
+var vertexData = helpers.vertexData;
 
 describe('graph_validator', function () {
     var edges;
@@ -38,9 +38,9 @@ describe('graph_validator', function () {
 
     describe('when validating a graph with no source', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-            };
+            vertices = [
+                vertexData('v1'),
+            ];
             source = undefined;
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);
@@ -50,9 +50,9 @@ describe('graph_validator', function () {
 
     describe('when validating a single-vertex graph', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-            };
+            vertices = [
+                vertexData('v1'),
+            ];
             source = 'v1';
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);
@@ -62,9 +62,9 @@ describe('graph_validator', function () {
 
     describe('when validating a single-vertex graph with mismatched source', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-            };
+            vertices = [
+                vertexData('v1'),
+            ];
             source = 'not_a_real_source';
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);
@@ -74,13 +74,13 @@ describe('graph_validator', function () {
 
     describe('when validating a 2-vertex graph', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-                'v2': vertexData(),
-            };
-            edges = {
-                'v1': 'v2'
-            };
+            vertices = [
+                vertexData('v1'),
+                vertexData('v2'),
+            ];
+            edges = [
+                edgeData('v1', 'v2'),
+            ];
             source = 'v1';
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);
@@ -90,11 +90,11 @@ describe('graph_validator', function () {
 
     describe('when validating a 2-vertex graph with an orphaned vertex', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-                'v2': vertexData(),
-            };
-            edges = {};
+            vertices = [
+                vertexData('v1'),
+                vertexData('v2'),
+            ];
+            edges = [];
             source = 'v1';
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);
@@ -104,12 +104,12 @@ describe('graph_validator', function () {
 
     describe('when validating a 2-vertex graph with nonexistent edge source', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-            };
-            edges = {
-                'not_real_edge_source': 'v1'
-            };
+            vertices = [
+                vertexData('v1'),
+            ];
+            edges = [
+                edgeData('not_real_edge_source', 'v1'),
+            ];
             source = 'v1';
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);
@@ -119,12 +119,12 @@ describe('graph_validator', function () {
 
     describe('when validating a 2-vertex graph with nonexistent edge sink', function () {
         beforeEach(function () {
-            vertices = {
-                'v1': vertexData(),
-            };
-            edges = {
-                'v1': 'not_real_edge_sink'
-            };
+            vertices = [
+                vertexData('v1'),
+            ];
+            edges = [
+                edgeData('v1', 'not_real_edge_sink'),
+            ];
             source = 'v1';
             graph = new Graph(vertices, edges, source);
             validator = new GraphValidator(graph);

@@ -3,18 +3,17 @@
 var Action = require('../lib/action');
 var Flow = require('../lib/flow');
 var Graph = require('../lib/graph');
+var helpers = require('./helpers');
+
+var edgeData = helpers.edgeData;
+var expectEdgesMatch = helpers.expectEdgesMatch;
+var vertexData = helpers.vertexData;
 
 function defineTestFlowAction() {
     var TestFlowAction = Action.extend({
         start: jasmine.createSpy(),
     });
     return TestFlowAction;
-}
-
-function vertexData(name) {
-    return {
-        name: name,
-    };
 }
 
 describe('flow', function () {
@@ -39,8 +38,8 @@ describe('flow', function () {
         it('should default to empty arrays for functions', function () {
             flow = new Flow({
                 graph: new Graph(
-                    { 'v1': 'payload' },
-                    {},
+                    [ vertexData('v1') ],
+                    [],
                     'v1'
                 ),
                 action_builder_functions: undefined,
@@ -51,29 +50,27 @@ describe('flow', function () {
         });
     });
 
+    var assertStartsAdapterWith = function (payload) {
+        it('should call start on an adapter with the next vertex payload', function () {
+            var callingContext;
+            var calls = Action.prototype.start.calls;
+            callingContext = calls.mostRecent().object;
+            expect(callingContext.payload).toEqual(payload);
+        });
+    };
+
     describe('when constructing with a valid graph', function () {
-        var assertStartsAdapterWith = function (payload) {
-            it('should call start on an adapter with the next vertex payload', function () {
-                var callingContext;
-                var calls = Action.prototype.start.calls;
-                expect(calls.count()).toEqual(1);
-
-                callingContext = calls.first().object;
-                expect(callingContext.payload).toEqual(payload);
-            });
-        };
-
         beforeEach(function () {
             graph = new Graph(
-                {
-                    'v1': vertexData('v1'),
-                    'v2': vertexData('v2'),
-                    'v3': vertexData('v3'),
-                },
-                {
-                    'v1': 'v2',
-                    'v2': 'v3',
-                },
+                [
+                    vertexData('v1', 'v1:payload'),
+                    vertexData('v2', 'v2:payload'),
+                    vertexData('v3', 'v3:payload'),
+                ],
+                [
+                    edgeData('v1', 'v2'),
+                    edgeData('v2', 'v3'),
+                ],
                 'v1'
             );
             flow = new Flow({
@@ -90,13 +87,13 @@ describe('flow', function () {
             describe('with another valid flow', function () {
                 beforeEach(function () {
                     otherGraph = new Graph(
-                        {
-                            'v4': vertexData('v4'),
-                            'v5': vertexData('v5'),
-                        },
-                        {
-                            'v4': 'v5',
-                        },
+                        [
+                            vertexData('v4'),
+                            vertexData('v5'),
+                        ],
+                        [
+                            edgeData('v4', 'v5'),
+                        ],
                         'v4'
                     );
                     otherFlow = new Flow({
@@ -110,13 +107,13 @@ describe('flow', function () {
                 it('should return a composed flow', function () {
                     var resultGraph = resultFlow.getGraph();
                     expect(resultGraph.getAllVertexNames()).toEqual(['v1', 'v2', 'v3', 'v4', 'v5']);
-                    expect(resultGraph.getAllEdges()).toEqual({
+                    expectEdgesMatch(resultGraph, {
                         'v1': 'v2',
                         'v2': 'v3',
                         'v3': 'v4',
                         'v4': 'v5',
                     });
-                    expect(resultGraph.getSourceVertex()).toEqual('v1');
+                    expect(resultGraph.getSourceName()).toEqual('v1');
                     expect(resultGraph.getAllSinkNames()).toEqual([ 'v5' ]);
                 });
 
@@ -139,7 +136,7 @@ describe('flow', function () {
 
         describe('when calling getCurrent', function () {
             it('should return the source vertex as the initial current vertex', function () {
-                expect(flow.getCurrent()).toEqual('v1');
+                expect(flow.getCurrent().getName()).toEqual('v1');
             });
         });
 
@@ -161,22 +158,22 @@ describe('flow', function () {
                     expect(result).toEqual(true);
                 });
 
-                assertStartsAdapterWith(vertexData('v2'));
+                assertStartsAdapterWith('v2:payload');
             });
         });
 
         describe('when calling next', function () {
             describe('with next vertex available', function () {
                 beforeEach(function () {
-                    flow.currentVertex = 'v1';
+                    flow.jumpTo('v1');
                     flow.next();
                 });
-                assertStartsAdapterWith(vertexData('v2'));
+                assertStartsAdapterWith('v2:payload');
             });
 
             describe('with no next vertex available', function () {
                 beforeEach(function () {
-                    flow.currentVertex = 'v3';
+                    flow.jumpTo('v3');
                     flow.next();
                 });
 
@@ -190,7 +187,75 @@ describe('flow', function () {
             beforeEach(function () {
                 flow.start();
             });
-            assertStartsAdapterWith(vertexData('v1'));
+            assertStartsAdapterWith('v1:payload');
+        });
+    });
+
+    describe('when constructing a valid multi-edge graph', function () {
+        beforeEach(function () {
+            graph = new Graph(
+                [
+                    vertexData('v1', 'v1:payload'),
+                    vertexData('v2', 'v2:payload'),
+                    vertexData('v3', 'v3:payload'),
+                    vertexData('v4', 'v4:payload'),
+                ],
+                [
+                    edgeData('v1', 'v2', function (options) {
+                        return options.path === 'v2';
+                    }),
+                    edgeData('v1', 'v3', function (options) {
+                        return options.path === 'v3';
+                    }),
+                    edgeData('v2', 'v4'),
+                    edgeData('v3', 'v4'),
+                ],
+                'v1'
+            );
+            flow = new Flow({
+                graph: graph,
+                action_builder_functions: [ adapterBuilderFn ],
+                when_finished_functions: [ finishedFn ],
+            });
+        });
+
+        describe('when  starting', function () {
+            beforeEach(function () {
+                flow.start();
+            });
+            assertStartsAdapterWith('v1:payload');
+        });
+
+        describe('when starting and calling next with v2 options', function () {
+            beforeEach(function () {
+                flow.start();
+                flow.next({ path: 'v2' });
+            });
+
+            assertStartsAdapterWith('v2:payload');
+
+            describe('when calling next', function () {
+                beforeEach(function () {
+                    flow.next();
+                });
+                assertStartsAdapterWith('v4:payload');
+            });
+        });
+
+        describe('when starting and calling next with v3 options', function () {
+            beforeEach(function () {
+                flow.start();
+                flow.next({ path: 'v3' });
+            });
+
+            assertStartsAdapterWith('v3:payload');
+
+            describe('when calling next', function () {
+                beforeEach(function () {
+                    flow.next();
+                });
+                assertStartsAdapterWith('v4:payload');
+            });
         });
     });
 });

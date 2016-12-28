@@ -2,6 +2,10 @@
 
 var Graph = require('../lib/graph');
 var GraphComposer = require('../lib/graph_composer');
+var helpers = require('./helpers');
+
+var edgeData = helpers.edgeData;
+var vertexData = helpers.vertexData;
 
 describe('graph_composer', function () {
     var composer;
@@ -35,23 +39,23 @@ describe('graph_composer', function () {
     describe('when composing with graphs with ambiguous vertices', function () {
         beforeEach(function () {
             graph1 = createGraph({
-                vertices: {
-                    'v1': 'payload',
-                    'v2': 'payload'
-                },
-                edges: {
-                    'v1': 'v2',
-                },
+                vertices: [
+                    vertexData('v1'),
+                    vertexData('v2'),
+                ],
+                edges: [
+                    edgeData('v1', 'v2'),
+                ],
                 source: 'v1'
             });
             graph2 = createGraph({
-                vertices: {
-                    'v1': 'payload',
-                    'v2': 'payload'
-                },
-                edges: {
-                    'v1': 'v2',
-                },
+                vertices: [
+                    vertexData('v1'),
+                    vertexData('v2'),
+                ],
+                edges: [
+                    edgeData('v1', 'v2'),
+                ],
                 source: 'v1'
             });
             composer = new GraphComposer(graph1, graph2);
@@ -68,13 +72,17 @@ describe('graph_composer', function () {
     describe('when composing with two unambiguous single-vertex graphs', function () {
         beforeEach(function () {
             graph1 = createGraph({
-                vertices: { 'v1': 'payload' },
-                edges: {},
+                vertices: [
+                    vertexData('v1'),
+                ],
+                edges: [],
                 source: 'v1',
             });
             graph2 = createGraph({
-                vertices: { 'v2': 'payload' },
-                edges: {},
+                vertices: [
+                    vertexData('v2'),
+                ],
+                edges: [],
                 source: 'v2',
             });
             composer = new GraphComposer(graph1, graph2);
@@ -83,8 +91,8 @@ describe('graph_composer', function () {
         it('should create a graph starting at v1 and ending at v2', function () {
             resultGraph = composer.compose();
             expect(resultGraph.getAllVertexNames()).toEqual(['v1', 'v2']);
-            expect(resultGraph.getAllEdges()).toEqual({ 'v1': 'v2' });
-            expect(resultGraph.getSourceVertex()).toEqual('v1');
+            expect(resultGraph.getAllEdges().length).toEqual(1);
+            expect(resultGraph.getSourceName()).toEqual('v1');
             expect(resultGraph.getAllSinkNames()).toEqual([ 'v2' ]);
         });
     });
@@ -92,19 +100,23 @@ describe('graph_composer', function () {
     describe('when composing with two unambiguous multi-vertex graphs', function () {
         beforeEach(function () {
             graph1 = createGraph({
-                vertices: {
-                    'v1': 'payload',
-                    'v2': 'payload',
-                },
-                edges: { 'v1': 'v2' },
+                vertices: [
+                    vertexData('v1'),
+                    vertexData('v2'),
+                ],
+                edges: [
+                    edgeData('v1', 'v2'),
+                ],
                 source: 'v1',
             });
             graph2 = createGraph({
-                vertices: {
-                    'v3': 'payload',
-                    'v4': 'payload',
-                },
-                edges: { 'v3': 'v4' },
+                vertices: [
+                    vertexData('v3'),
+                    vertexData('v4'),
+                ],
+                edges: [
+                    edgeData('v3', 'v4'),
+                ],
                 source: 'v3',
             });
             composer = new GraphComposer(graph1, graph2);
@@ -113,12 +125,8 @@ describe('graph_composer', function () {
         it('should create a graph starting at v1 and ending at v4', function () {
             resultGraph = composer.compose();
             expect(resultGraph.getAllVertexNames()).toEqual(['v1', 'v2', 'v3', 'v4']);
-            expect(resultGraph.getAllEdges()).toEqual({
-                'v1': 'v2',
-                'v2': 'v3',
-                'v3': 'v4',
-            });
-            expect(resultGraph.getSourceVertex()).toEqual('v1');
+            expect(resultGraph.getAllEdges().length).toEqual(3);
+            expect(resultGraph.getSourceName()).toEqual('v1');
             expect(resultGraph.getAllSinkNames()).toEqual([ 'v4' ]);
         });
     });

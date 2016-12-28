@@ -6,10 +6,12 @@ describe('flow', function () {
     [
         'Action',
         'Builder',
+        'Edge',
         'Graph',
         'GraphComposer',
         'GraphValidator',
         'Traverser',
+        'Vertex',
     ].forEach(function (namespace) {
         it('should have an extensible namespaced constructor', function () {
             expect(Flow[namespace]).toBeDefined();
