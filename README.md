@@ -1,3 +1,4 @@
+<img src="docs/flow_banner.png" height="48" align="left">
 # Flow
 
 [![Build Status](https://travis-ci.org/kgarsjo/Flow.svg?branch=master)](https://travis-ci.org/kgarsjo/Flow)
