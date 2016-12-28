@@ -1,6 +1,6 @@
 {
   "name": "flow",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An action-driven traverser of directed graphs",
   "main": "flow.js",
   "scripts": {
