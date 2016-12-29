@@ -46,7 +46,7 @@ Parameters:
 
 Example:
 ```javascript
-var edge = new Edge('onboard_start, 'onboard_login', function (options) {
+var edge = new Edge('onboard_start', 'onboard_login', function (options) {
   return options.onboard_type = 'login';
 });
 ```
