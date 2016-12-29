@@ -53,7 +53,7 @@ Test out an [enhanced version of this example](http://codepen.io/kgarsjo/full/vy
 
 - Model and simulate a traffic network for a city.
 
-## How do I use it in my project?
+# How do I use it in my project?
 
 Flow is currently in a pre-release stage, so an NPM repository package hasn't been created yet (one should be on its way shortly!).
 
@@ -66,6 +66,17 @@ npm install --save kgarsjo/flow#<version>
 ```
 yarn add kgarsjo/flow#<version>
 ```
+
+# Where's the Documentation?
+
+Documentation is currently WIP. Here are some parts currently available:
+
+Below are the Flow types that you **must** or **should** extend to get value from the project:
+- [Action](docs/action.md)
+
+Below are the Flow types that you **can** extend for custom solutions, but are not required for use:
+- [Edge](docs/edge.md)
+- [Vertex](docs/vertex.md)
 
 # Installing from scratch
 
