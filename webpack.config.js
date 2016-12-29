@@ -2,7 +2,7 @@ var webpack = require('webpack');
 
 var fullOutputConfig = {
     output: {
-        library: 'flow',
+        library: 'Flow',
         libraryTarget: 'umd',
         path: './dist',
         filename: 'flow.js'
@@ -14,7 +14,7 @@ var fullOutputConfig = {
 
 var minfiedOutputConfig = {
     output: {
-        library: 'flow',
+        library: 'Flow',
         libraryTarget: 'umd',
         path: './dist',
         filename: 'flow.min.js'

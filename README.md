@@ -1,15 +1,78 @@
+<img src="docs/flow_banner.png" height="48" align="left">
 # Flow
 
 [![Build Status](https://travis-ci.org/kgarsjo/Flow.svg?branch=master)](https://travis-ci.org/kgarsjo/Flow)
 
 > An action-driven traverser of directed graphs
 
-## Installation
+## What does Flow do?
+
+Flow describes directed graphs - a collection of vertices and one-way edges. It allows you to traverse a described graph by following the edges, and to trigger actions for every vertex you encounter along the way.
+
+## How might I use it?
+
+Here's an example that uses flows to sequentially change the background color of a webpage:
+
+```javascript
+var Flow = require('flow');
+
+var ColorAction = Flow.Action.extend({
+    start: function () {
+        document.body.style.backgroundColor = this.payload;
+    },
+});
+
+var colorFlow = new Flow.Builder()
+    .addVertex({ name: 'color1', next: 'color2' }, 'red')
+    .addVertex({ name: 'color2', next: 'color3' }, 'blue')
+    .addVertex({ name: 'color3' }, 'green')
+    .addActionBuilder(function (flow, color) {
+        return new ColorAction({
+            flow: flow,
+            payload: color,
+        });
+    })
+    .whenFinished(function () {
+        document.body.style.backgroundColor = gray;
+        document.body.text = 'Done!';
+    })
+    .build();
+
+colorFlow.start();
+```
+
+Test out an [enhanced version of this example](http://codepen.io/kgarsjo/full/vyoGEy/) on CodePen.
+
+## What else can I do with it?
+
+- Wrap a view library inside an Action, and you can drive your user interactions via flows. For example, see [Marionette.Flow](https://github.com/kgarsjo/marionette.flow).
+
+- Drive a storyline for a Role-playing Game by describing each story stage in vertices and edges.
+
+- Build a map of interconnected rooms.
+
+- Model and simulate a traffic network for a city.
+
+## How do I use it in my project?
+
+Flow is currently in a pre-release stage, so an NPM repository package hasn't been created yet (one should be on its way shortly!).
+
+To use flow in a Node context from this GitHub repo, use either of the following:
+
+```
+npm install --save kgarsjo/flow#<version>
+```
+
+```
+yarn add kgarsjo/flow#<version>
+```
+
+## Installing from scratch
 
 If you haven't already, install [Yarn](https://yarnpkg.com/en/docs/install).
 
-To install Flow, run `yarn`.
+To install Flow and its dependencies, run `yarn`.
 
-To build, run `yarn build`.
+To build the combined and minified distribution files, run `yarn build`.
 
-To test, run `yarn test`.
+To kick off the test suite, run `yarn test`.
