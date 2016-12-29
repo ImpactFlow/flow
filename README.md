@@ -1,15 +1,15 @@
 <img src="docs/flow_banner.png" height="48" align="left">
 # Flow
 
-[![Build Status](https://travis-ci.org/kgarsjo/Flow.svg?branch=master)](https://travis-ci.org/kgarsjo/Flow)
+[![Build Status](https://travis-ci.org/kgarsjo/flow.svg?branch=master)](https://travis-ci.org/kgarsjo/flow)
 
 > An action-driven traverser of directed graphs
 
-## What does Flow do?
+# What does Flow do?
 
 Flow describes directed graphs - a collection of vertices and one-way edges. It allows you to traverse a described graph by following the edges, and to trigger actions for every vertex you encounter along the way.
 
-## How might I use it?
+# How might I use it?
 
 Here's an example that uses flows to sequentially change the background color of a webpage:
 
@@ -43,7 +43,7 @@ colorFlow.start();
 
 Test out an [enhanced version of this example](http://codepen.io/kgarsjo/full/vyoGEy/) on CodePen.
 
-## What else can I do with it?
+# What else can I do with it?
 
 - Wrap a view library inside an Action, and you can drive your user interactions via flows. For example, see [Marionette.Flow](https://github.com/kgarsjo/marionette.flow).
 
@@ -67,7 +67,7 @@ npm install --save kgarsjo/flow#<version>
 yarn add kgarsjo/flow#<version>
 ```
 
-## Installing from scratch
+# Installing from scratch
 
 If you haven't already, install [Yarn](https://yarnpkg.com/en/docs/install).
 
