@@ -1,15 +1,15 @@
 <img src="docs/flow_banner.png" height="48" align="left">
 # Flow
 
-[![Build Status](https://travis-ci.org/kgarsjo/Flow.svg?branch=master)](https://travis-ci.org/kgarsjo/Flow)
+[![Build Status](https://travis-ci.org/kgarsjo/flow.svg?branch=master)](https://travis-ci.org/kgarsjo/flow)
 
 > An action-driven traverser of directed graphs
 
-## What does Flow do?
+# What does Flow do?
 
 Flow describes directed graphs - a collection of vertices and one-way edges. It allows you to traverse a described graph by following the edges, and to trigger actions for every vertex you encounter along the way.
 
-## How might I use it?
+# How might I use it?
 
 Here's an example that uses flows to sequentially change the background color of a webpage:
 
@@ -43,7 +43,7 @@ colorFlow.start();
 
 Test out an [enhanced version of this example](http://codepen.io/kgarsjo/full/vyoGEy/) on CodePen.
 
-## What else can I do with it?
+# What else can I do with it?
 
 - Wrap a view library inside an Action, and you can drive your user interactions via flows. For example, see [Marionette.Flow](https://github.com/kgarsjo/marionette.flow).
 
@@ -53,7 +53,7 @@ Test out an [enhanced version of this example](http://codepen.io/kgarsjo/full/vy
 
 - Model and simulate a traffic network for a city.
 
-## How do I use it in my project?
+# How do I use it in my project?
 
 Flow is currently in a pre-release stage, so an NPM repository package hasn't been created yet (one should be on its way shortly!).
 
@@ -67,7 +67,18 @@ npm install --save kgarsjo/flow#<version>
 yarn add kgarsjo/flow#<version>
 ```
 
-## Installing from scratch
+# Where's the Documentation?
+
+Documentation is currently WIP. Here are some parts currently available:
+
+Below are the Flow types that you **must** or **should** extend to get value from the project:
+- [Action](docs/action.md)
+
+Below are the Flow types that you **can** extend for custom solutions, but are not required for use:
+- [Edge](docs/edge.md)
+- [Vertex](docs/vertex.md)
+
+# Installing from scratch
 
 If you haven't already, install [Yarn](https://yarnpkg.com/en/docs/install).
 
