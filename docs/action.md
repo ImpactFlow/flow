@@ -2,10 +2,20 @@
 
 > [lib/action.js](https://github.com/kgarsjo/flow/blob/master/lib/action.js)
 
-
 An `Action` consumes the payload of a traversed `Vertex` and does something desireable with it. `Action`s are attached to flows via `Builder`s.
 
 `Action`s capture the intersection between flows and your domain logic, so they are designed to be extended and customized.
+
+As an example, here is a custom action that replaces the browser url with a `path` value set on each vertex of the flow:
+
+```javascript
+var ReplaceHistoryAction = Action.extend({
+    start: function () {
+        var path = this.payload.path;
+        window.location.replace(path);
+    },
+});
+```
 
 ## Properties
 
