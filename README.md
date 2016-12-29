@@ -41,17 +41,38 @@ var colorFlow = new Flow.Builder()
 colorFlow.start();
 ```
 
-Test out an enhanced version of this example below:
+Test out an [enhanced version of this example](http://codepen.io/kgarsjo/full/vyoGEy/) on CodePen.
 
-<iframe height='265' scrolling='no' title='Color Flow' src='//codepen.io/kgarsjo/embed/vyoGEy/?height=265&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/kgarsjo/pen/vyoGEy/'>Color Flow</a> by Kevin Garsjo (<a href='http://codepen.io/kgarsjo'>@kgarsjo</a>) on <a href='http://codepen.io'>CodePen</a>.
-</iframe>
+## What else can I do with it?
 
-## Installation
+- Wrap a view library inside an Action, and you can drive your user interactions via flows. For example, see [Marionette.Flow](https://github.com/kgarsjo/marionette.flow).
+
+- Drive a storyline for a Role-playing Game by describing each story stage in vertices and edges.
+
+- Build a map of interconnected rooms.
+
+- Model and simulate a traffic network for a city.
+
+## How do I use it in my project?
+
+Flow is currently in a pre-release stage, so an NPM repository package hasn't been created yet (one should be on its way shortly!).
+
+To use flow in a Node context from this GitHub repo, use either of the following:
+
+```
+npm install --save kgarsjo/flow#<version>
+```
+
+```
+yarn add kgarsjo/flow#<version>
+```
+
+## Installing from scratch
 
 If you haven't already, install [Yarn](https://yarnpkg.com/en/docs/install).
 
-To install Flow, run `yarn`.
+To install Flow and its dependencies, run `yarn`.
 
-To build, run `yarn build`.
+To build the combined and minified distribution files, run `yarn build`.
 
-To test, run `yarn test`.
+To kick off the test suite, run `yarn test`.
