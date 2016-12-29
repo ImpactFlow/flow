@@ -1,6 +1,9 @@
-# Vertex ([lib/vertex.js](https://github.com/kgarsjo/flow/blob/master/lib/vertex.js))
+# Vertex
 
-A vertex is a data object containing a name and a payload. It is referenced by Builders, Edges, Flows, and Graphs.
+> [lib/vertex.js](https://github.com/kgarsjo/flow/blob/master/lib/vertex.js)
+
+
+A `Vertex` is a data object containing a name and a payload. It is referenced by Builders, Edges, Flows, and Graphs.
 
 ## Properties
 
@@ -14,9 +17,9 @@ A vertex is a data object containing a name and a payload. It is referenced by B
 
 - [`extend`](#user-content-extend)
 
-- [`getName`](#user-content-getName)
+- [`getName`](#user-content-getname)
 
-- [`getPayload`](#user-content-getPayload)
+- [`getPayload`](#user-content-getpayload)
 
 # Definitions
 
@@ -30,8 +33,8 @@ A vertex is a data object containing a name and a payload. It is referenced by B
 Creates a new `Vertex`.
 
 Parameters:
-- (string): name
-- (any): payload
+- `string:name`
+- `any:payload`
 
 Example:
 ```javascript
@@ -40,7 +43,7 @@ var vertex = new Vertex('v1', { foo: 'bar' });
 
 ## `extend`
 Paramters:
-- (object): prototypeFragment, a map of properties which should be extended onto a new subclass of Vertex.
+- `object:prototypeFragment`, a map of properties which should be extended onto a new subclass of Vertex.
 
 Returns a new Type which subclasses `Vertex` using the given prototype fragment.
 
@@ -58,7 +61,6 @@ var CustomVertex = Vertex.extend({
 ```
 
 ## `getName`
-
 Returns the name of this vertex.
 
 Example:
@@ -67,7 +69,6 @@ var name = vertex.getName();
 ```
 
 ## `getPayload`
-
 Returns the payload of this vertex.
 
 Example:
