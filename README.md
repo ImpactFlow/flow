@@ -43,8 +43,8 @@ colorFlow.start();
 
 Test out an enhanced version of this example below:
 
-<p data-height="265" data-theme-id="dark" data-slug-hash="vyoGEy" data-default-tab="result" data-user="kgarsjo" data-embed-version="2" data-pen-title="Color Flow" data-preview="true" class="codepen">See the Pen <a href="http://codepen.io/kgarsjo/pen/vyoGEy/">Color Flow</a> by Kevin Garsjo (<a href="http://codepen.io/kgarsjo">@kgarsjo</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+<iframe height='265' scrolling='no' title='Color Flow' src='//codepen.io/kgarsjo/embed/vyoGEy/?height=265&theme-id=dark&default-tab=result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='http://codepen.io/kgarsjo/pen/vyoGEy/'>Color Flow</a> by Kevin Garsjo (<a href='http://codepen.io/kgarsjo'>@kgarsjo</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
 
 ## Installation
 
