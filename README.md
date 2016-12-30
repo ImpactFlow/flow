@@ -71,11 +71,14 @@ yarn add kgarsjo/flow#<version>
 
 Documentation is currently WIP. Here are some parts currently available:
 
-Below are the Flow types that you **must** or **should** extend to get value from the project:
+Below are the Flow types that you **must** or **should** extend op consume to get value from the project:
 - [Action](docs/action.md)
+- [Builder](docs/builder.md)
+- [Flow](docs/builder.md)
 
 Below are the Flow types that you **can** extend for custom solutions, but are not required for use:
 - [Edge](docs/edge.md)
+- [Graph](docs/graph.md)
 - [Vertex](docs/vertex.md)
 
 # Installing from scratch
