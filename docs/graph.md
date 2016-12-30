@@ -20,29 +20,29 @@ A `Graph` is the data structure over which a `Flow` traverses. `Graph`s are defi
 
 - [`extend`](#user-content-extend)
 
-- [`getAllEdges`](#user-content-getcurrent)
+- [`getAllEdges`](#user-content-getalledges)
 
-- [`getAllEdgeTargets`](#user-content-getcurrent)
+- [`getAllEdgeTargets`](#user-content-getalledgetargets)
 
-- [`getAklSinkNames`](#user-content-getcurrent)
+- [`getAllSinkNames`](#user-content-getallsinknames)
 
-- [`getAllTargets`](#user-content-getcurrent)
+- [`getAllTargets`](#user-content-getalltargets)
 
-- [`getAllVertexNames`](#user-content-getcurrent)
+- [`getAllVertexNames`](#user-content-getallvertexnames)
 
-- [`getAllVertices`](#user-content-getcurrent)
+- [`getAllVertices`](#user-content-getallvertices)
 
-- [`getNextVertex`](#user-content-getcurrent)
+- [`getNextVertex`](#user-content-getnextvertex)
 
-- [`getSourceName`](#user-content-getcurrent)
+- [`getSourceName`](#user-content-getsourcename)
 
-- [`getSourceVertex`](#user-content-getcurrent)
+- [`getSourceVertex`](#user-content-getsourcevertex)
 
-- [`getVertexNamed`](#user-content-getcurrent)
+- [`getVertexNamed`](#user-content-getvertexnamed)
 
-- [`hasVertexNamed`](#user-content-getcurrent)
+- [`hasVertexNamed`](#user-content-hasvertexnamed)
 
-- [`validate`](#user-content-getcurrent)
+- [`validate`](#user-content-validate)
 
 # Definitions
 
