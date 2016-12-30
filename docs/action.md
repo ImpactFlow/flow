@@ -42,7 +42,7 @@ var ReplaceHistoryAction = Action.extend({
 (any): The data this action will use.
 
 ## `constructor`
-Creates a new `Action`. The action instances are expected to be created internally by `Flow`s as the graph is traversed, so this should only be called manually for customized solutions.
+Creates a new `Action`.
 
 Parameters:
 - `object:options`. Options recognized are `flow` (required) and `payload`.
@@ -63,7 +63,7 @@ Returns a new Type which subclasses `Action` using the given prototype fragment.
 
 Example:
 ```javascript
-var ReplaceHistoryAction = Action.extend({
+var ReplaceHistoryAction = Flow.Action.extend({
     start: function () {
         var path = this.payload.path;
         window.location.replace(path);
