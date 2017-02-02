@@ -20,5 +20,8 @@ script:
   - yarn lint
   - yarn test
 
+after_success:
+  - yarn report-coverage
+
 notifications:
   email: false
