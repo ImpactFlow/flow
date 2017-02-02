@@ -3,6 +3,8 @@
 
 [![Build Status](https://travis-ci.org/kgarsjo/flow.svg?branch=master)](https://travis-ci.org/kgarsjo/flow)
 
+[![Coverage Status](https://coveralls.io/repos/github/kgarsjo/Flow/badge.svg?branch=master)](https://coveralls.io/github/kgarsjo/Flow?branch=master)
+
 > An action-driven traverser of directed graphs
 
 # What does Flow do?
