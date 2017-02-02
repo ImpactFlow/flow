@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node_modules/.bin/webpack",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
-    "report-coverage": "echo ./coverage/lcov.info > ./node_modules/coveralls/bin/coveralls.js",
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test": "node_modules/.bin/jest"
   },
   "keywords": [
