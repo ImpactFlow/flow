@@ -4,7 +4,7 @@
 
 A `Graph` is the data structure over which a `Flow` traverses. `Graph`s are defined in the mathematical form as a set of both vertices `V` and edges `E`, where `e ∈ E` connects two vertices in `V`. 
 
-`Graph`s here are considered directed graphs (one-way edges) with one unique source vertex (starting point). The graph also recognizes sink vertices, a.k.a. vertices that trap a traverser because they have not departing edges.
+`Graph`s here are considered directed graphs (one-way edges) with one unique source vertex (starting point). The graph also recognizes sink vertices, a.k.a. vertices that trap a traverser because they have no departing edges.
 
 ## Properties
 
