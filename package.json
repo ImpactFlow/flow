@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node_modules/.bin/webpack",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
+    "report-coverage": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "test": "node_modules/.bin/jest"
   },
   "keywords": [
@@ -20,6 +21,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "coveralls": "^2.11.15",
     "eslint": "^3.12.2",
     "jasmine": "^2.5.2",
     "jest": "^18.0.0",
@@ -37,7 +39,7 @@
     ],
     "coverageDirectory": "./coverage",
     "coverageReporters": [
-      "html",
+      "lcov",
       "text-summary"
     ],
     "coverageThreshold": {
