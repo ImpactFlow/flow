@@ -18,19 +18,12 @@ function defineTestFlowAction() {
 
 describe('flow', function () {
     var Action;
-    var adapterBuilderFn;
     var finishedFn;
     var flow;
     var graph;
 
     beforeEach(function () {
         Action = defineTestFlowAction();
-        adapterBuilderFn = function (flow, payload) {
-            return new Action({
-                flow: flow,
-                payload: payload,
-            });
-        };
         finishedFn = jasmine.createSpy();
     });
 
@@ -42,20 +35,19 @@ describe('flow', function () {
                     [],
                     'v1'
                 ),
-                action_builder_functions: undefined,
+                actions: undefined,
                 when_finished_functions: undefined,
             });
-            expect(flow.getActionBuilderFunctions()).toEqual([]);
+            expect(flow.getActions()).toEqual([]);
             expect(flow.getWhenFinishedFunctions()).toEqual([]);
         });
     });
 
     var assertStartsAdapterWith = function (payload) {
         it('should call start on an adapter with the next vertex payload', function () {
-            var callingContext;
             var calls = Action.prototype.start.calls;
-            callingContext = calls.mostRecent().object;
-            expect(callingContext.payload).toEqual(payload);
+            var actualPayload = calls.mostRecent().args[0];
+            expect(actualPayload).toEqual(payload);
         });
     };
 
@@ -75,7 +67,7 @@ describe('flow', function () {
             );
             flow = new Flow({
                 graph: graph,
-                action_builder_functions: [ adapterBuilderFn ],
+                actions: [ new Action() ],
                 when_finished_functions: [ finishedFn ],
             });
         });
@@ -98,7 +90,7 @@ describe('flow', function () {
                     );
                     otherFlow = new Flow({
                         graph: otherGraph,
-                        action_builder_functions: [ adapterBuilderFn ],
+                        actions: [ new Action() ],
                         when_finished_functions: [ finishedFn ],
                     });
                     resultFlow = flow.compose(otherFlow);
@@ -214,7 +206,7 @@ describe('flow', function () {
             );
             flow = new Flow({
                 graph: graph,
-                action_builder_functions: [ adapterBuilderFn ],
+                actions: [ new Action() ],
                 when_finished_functions: [ finishedFn ],
             });
         });
