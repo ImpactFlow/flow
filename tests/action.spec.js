@@ -3,7 +3,7 @@
 var Action = require('../lib/action');
 
 describe('action', function () {
-    var adapter;
+    var action;
     var flow;
     var payload;
 
@@ -12,26 +12,24 @@ describe('action', function () {
             next: jasmine.createSpy(),
         };
         payload = {};
-        adapter = new Action({
-            flow: flow,
-            payload: payload,
-        });
+        action = new Action();
+        action.setFlow(flow);
     });
 
     it('should exist', function () {
-        expect(adapter).toBeDefined();
+        expect(action).toBeDefined();
     });
 
     describe('when calling next', function () {
         it('should call next on the passed flow', function () {
-            adapter.next();
+            action.next();
             expect(flow.next).toHaveBeenCalled();
         });
     });
 
     describe('when calling start', function () {
         it('should throw no error', function () {
-            adapter.start();
+            action.start(payload);
         });
     });
 });
