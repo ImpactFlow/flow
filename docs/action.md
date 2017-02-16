@@ -10,8 +10,8 @@ As an example, here is a custom action that replaces the browser url with a `pat
 
 ```javascript
 var ReplaceHistoryAction = Action.extend({
-    start: function () {
-        var path = this.payload.path;
+    start: function (payload) {
+        var path = payload.path;
         window.location.replace(path);
     },
 });
@@ -61,8 +61,8 @@ Returns a new Type which subclasses `Action` using the given prototype fragment.
 Example:
 ```javascript
 var ReplaceHistoryAction = Flow.Action.extend({
-    start: function () {
-        var path = this.payload.path;
+    start: function (payload) {
+        var path = payload.path;
         window.location.replace(path);
     },
 });
