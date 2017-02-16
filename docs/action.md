@@ -10,8 +10,8 @@ As an example, here is a custom action that replaces the browser url with a `pat
 
 ```javascript
 var ReplaceHistoryAction = Action.extend({
-    start: function () {
-        var path = this.payload.path;
+    start: function (payload) {
+        var path = payload.path;
         window.location.replace(path);
     },
 });
@@ -21,8 +21,6 @@ var ReplaceHistoryAction = Action.extend({
 
 - [`flow`](#user-content-flow)
 
-- [`payload`](#user-content-payload)
-
 ## Functions
 
 - [`constructor`](#user-content-constructor)
@@ -31,15 +29,14 @@ var ReplaceHistoryAction = Action.extend({
 
 - [`next`](#user-content-next)
 
+- [`setFlow`](#user-content-set-flow)
+
 - [`start`](#user-content-start)
 
 # Definitions
 
 ## `flow`
 (Flow): The `Flow` to which this action belongs.
-
-## `payload`
-(any): The data this action will use.
 
 ## `constructor`
 Creates a new `Action`.
@@ -64,8 +61,8 @@ Returns a new Type which subclasses `Action` using the given prototype fragment.
 Example:
 ```javascript
 var ReplaceHistoryAction = Flow.Action.extend({
-    start: function () {
-        var path = this.payload.path;
+    start: function (payload) {
+        var path = payload.path;
         window.location.replace(path);
     },
 });
@@ -79,10 +76,24 @@ Example:
 action.next();
 ```
 
+## `setFlow`
+Parameters:
+- `Flow:flow`. The flow this action belongs to
+
+The `setFlow` function will be called when the action is registered to a flow.
+
+Example:
+```javascript
+action.start(payload);
+```
+
 ## `start`
+Parameters:
+- `object:payload`. The payload to act upon.
+
 The `start` function will be called when a vertex is traversed. Override `start` to do something important to your domain logic whenever a new traversal happens.
 
 Example:
 ```javascript
-action.start();
+action.start(payload);
 ```
