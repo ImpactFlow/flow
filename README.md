@@ -17,8 +17,8 @@ Here's an example that uses flows to sequentially change the background color of
 var Flow = require('flow');
 
 var ColorAction = Flow.Action.extend({
-    start: function () {
-        document.body.style.backgroundColor = this.payload;
+    start: function (color) {
+        document.body.style.backgroundColor = color;
     },
 });
 
@@ -26,12 +26,7 @@ var colorFlow = new Flow.Builder()
     .addVertex({ name: 'color1', next: 'color2' }, 'red')
     .addVertex({ name: 'color2', next: 'color3' }, 'blue')
     .addVertex({ name: 'color3' }, 'green')
-    .addActionBuilder(function (flow, color) {
-        return new ColorAction({
-            flow: flow,
-            payload: color,
-        });
-    })
+    .addAction(new ColorAction())
     .whenFinished(function () {
         document.body.style.backgroundColor = gray;
         document.body.text = 'Done!';

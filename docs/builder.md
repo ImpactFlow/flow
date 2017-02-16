@@ -22,13 +22,12 @@ var CountingFlowBuilder = Flow.Builder.extend({
             this.addCountStep(i, n);
         }
         this.startAtVertex('v1')
-            .addActionBuilder(function (flow, payload) {
-                return new LogAction({ flow: flow, payload: payload });
-            }).whenFinished(functon () {
+            .addAction(new LogAction())
+            .whenFinished(functon () {
                 console.log('Finished!');
             });
     },
-    
+
     addCountStep: function (i, n) {
         var vertexName = 'v' + i;
         var nextVertex = (i === n) ? undefined : 'v' + (i + 1);
@@ -62,7 +61,7 @@ for (var i = 0; i < 100; i++) {
 
 - [`graph`](#user-content-graph)
 
-- [`actionBuilderFunctions`](#user-content-edges)
+- [`actions`](#user-content-actions)
 
 - [`whenFinishedFunctions`](#user-content-edges)
 
@@ -72,7 +71,7 @@ for (var i = 0; i < 100; i++) {
 
 - [`extend`](#user-content-extend)
 
-- [`addActionBuilder`](#user-content-addactionbuilder)
+- [`addAction`](#user-content-addaction)
 
 - [`addVertex`](#user-content-addvertex)
 
@@ -93,8 +92,8 @@ for (var i = 0; i < 100; i++) {
 ## `source`
 (any): The source vertex name to construct the graph with when `build`ing.
 
-## `actionBuilderFunctions`
-(any): An array of functions that register actions. To be used when constructing the graph on `build`.
+## `actions`
+(any): An array of actions to register. To be used when constructing the graph on `build`.
 
 ## `whenFinishedFunctions`
 (any): An array of functions that register callbacks when the traversal is finished. To be used when constructing the graph on `build`.
@@ -121,13 +120,12 @@ var CountingFlowBuilder = Flow.Builder.extend({
             this.addCountStep(i, n);
         }
         this.startAtVertex('v1')
-            .addActionBuilder(function (flow, payload) {
-                // ... return some action
-            }).whenFinished(functon () {
+            .addAction(/* some action instance */)
+            .whenFinished(functon () {
                 console.log('Finished!');
             });
     },
-    
+
     addCountStep: function (i, n) {
         var vertexName = 'v' + i;
         var nextVertex = (i === n) ? undefined : 'v' + (i + 1);
@@ -136,9 +134,9 @@ var CountingFlowBuilder = Flow.Builder.extend({
 });
 ```
 
-## `addActionBuilder`
+## `addAction`
 Parameters:
-- `function:actionBuilderFn`, a callback function that acepts 2 parameters (`Flow:flow`, `any:payload`) and returns an `Action`.
+- `Action:action`, an action to register with this flow.
 
 Returns `this`.
 
@@ -146,12 +144,7 @@ Registers a callback function which returns an action. This function will be cal
 
 Example:
 ```javascript
-builder.addActionBuilder(function (flow, payload) {
-    return new SomeAction({
-        flow: flow,
-        payload: payload,
-    });
-});
+builder.addAction(new SomeAction());
 ```
 
 ## `addVertex`
@@ -207,7 +200,7 @@ Example:
 var flow = builder.addVertex({ name: 'v1', next: 'v2')
     .addVertex({ name: 'v2' })
     .startAtVertex('v1')
-    .addActionBuilder(function (flow, payload) { ... })
+    .addAction(new SomeAction())
     .whenFinished(function () { ... })
     .build();
 ```
