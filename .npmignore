@@ -1,8 +1,13 @@
 .git/
 coverage/
+docs/
 dist/.keep
 node_modules/
 tests/
+.coveralls.yml
+.eslintignore
 .eslintrc.json
 .gitignore
+.travis.yml
 webpack.config.js
+yarn.lock
