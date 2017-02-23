@@ -1,8 +1,8 @@
 {
   "name": "flow",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "An action-driven traverser of directed graphs",
-  "main": "flow.js",
+  "main": "dist/flow.js",
   "scripts": {
     "build": "node_modules/.bin/webpack",
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
