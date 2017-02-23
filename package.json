@@ -1,5 +1,5 @@
 {
-  "name": "flow",
+  "name": "flow-dag",
   "version": "1.0.1",
   "description": "An action-driven traverser of directed graphs",
   "main": "dist/flow.js",
