@@ -1,4 +1,5 @@
 <img src="https://github.com/ImpactFlow/flow/blob/master/docs/flow_banner.png" height="48" align="left">
+
 # Flow
 
 [![Build Status](https://travis-ci.org/ImpactFlow/flow.svg?branch=master)](https://travis-ci.org/ImpactFlow/flow) [![Coverage Status](https://coveralls.io/repos/github/kgarsjo/Flow/badge.svg?branch=master)](https://coveralls.io/github/kgarsjo/Flow?branch=master)
